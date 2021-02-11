@@ -14,7 +14,7 @@ char keys[ROWS][COLS] = {
   {'7','8','9','C'},
   {'*','0','#','D'}
 };
-byte rowPins[ROWS] = {A0,2,3,4}; //connect to the row pinouts of the keypad
+byte rowPins[ROWS] = {A0,A1,A2,A3}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {5,6,7,8}; //connect to the column pinouts of the keypad
 
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
@@ -40,11 +40,11 @@ void loop() {
    Serial.println("");
     if(StrUID=="DB692E0B"){
       Serial.println("Vehicle no: RJ14-LC-1996");
-      Serial.print("Select Charge: ");
+      Serial.println("Select Charge: ");
       while(penalty=="" or charge==""){
         penalty, charge = fine();
       }
-      Serial.println("Mr. ADITYA is fined Rs. ");
+      Serial.print("Mr. ADITYA is fined Rs. ");
       Serial.print(penalty);
       Serial.print(" for ");
       Serial.print(charge);
