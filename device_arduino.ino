@@ -34,16 +34,17 @@ void setup() {
 }
 
 void loop() {
-
-   readsuccess = getid();
+  readsuccess = getid();
+//  Serial.println(StrUID);
   if(readsuccess) {
    Serial.println("");
-    if(StrUID=="DB692E0B"){
+    if(StrUID=="3333C31A"){
       Serial.println("Vehicle no: RJ14-LC-1996");
-      Serial.println("Select Charge: ");
+      show_charges();
       while(penalty=="" or charge==""){
         penalty, charge = fine();
       }
+      Serial.println();
       Serial.print("Mr. ADITYA is fined Rs. ");
       Serial.print(penalty);
       Serial.print(" for ");
@@ -54,12 +55,13 @@ void loop() {
       penalty = "";
       charge="";
       }
-    if(StrUID=="E63C27F8"){
+    if(StrUID=="4C5F4249"){
     Serial.println("Vehicle no: RJ14-CG-3542");
-    Serial.println("Select Charge: ");
+    show_charges();
     while(penalty=="" or charge==""){
       penalty, charge = fine();
     }
+    Serial.println();
     Serial.print("Mr. Tanmay is fined Rs. ");
     Serial.print(penalty);
     Serial.print(" for ");
@@ -72,10 +74,11 @@ void loop() {
   }
   if(StrUID=="FE9EC983"){
     Serial.println("Vehicle no: RJ20-AS-9817");
-    Serial.println("Select Charge: ");
+    show_charges();
     while(penalty=="" or charge==""){
       penalty, charge = fine();
     }
+    Serial.println();
     Serial.print("Miss. Shivani is fined Rs. ");
     Serial.print(penalty);
     Serial.print(" for ");
@@ -110,28 +113,67 @@ int getid() {
 String fine(){
   char key = keypad.getKey();
   if (key){
-  if (key=='1'){
-    penalty = "200";
-    charge = "Not wearing Helmet" ;
-  }
-  if (key=='2'){
-    penalty = "1000";
-    charge = "lack of Documents" ;
-  }
-  if (key=='3'){
-    penalty = "1500";
-    charge = "Rash Driving" ;
-  }
-  if (key=='4'){
-    penalty = "500";
-    charge = "Not having Insurance" ;
-  }
-  }
-  else{
-    penalty="";
-    charge="";
+    if (key=='1'){
+      penalty = "200";
+      charge = "Not wearing Helmet" ;
+    }
+    else if (key=='2'){
+      penalty = "1000";
+      charge = "lack of Documents" ;
+    }
+    else if (key=='3'){
+      penalty = "1500";
+      charge = "Rash Driving" ;
+    }
+    else if (key=='4'){
+      penalty = "500";
+      charge = "Not having Insurance" ;
+    }
+    else if (key=='5'){
+      penalty = "1000";
+      charge = "Overspeeding" ;
+    }
+    else if (key=='6'){
+      penalty = "5000";
+      charge = "Drunk and Drive" ;
+    }
+    else if (key=='7'){
+      penalty = "800";
+      charge = "Not wearing Seat Belt" ;
+    }
+    else if (key=='8'){
+      penalty = "250";
+      charge = "Unauthorised parking" ;
+    }
+    else if (key=='9'){
+      penalty = "500";
+      charge = "Obstructing Traffic" ;
+    }
+    else if (key=='A'){
+      penalty = "1500";
+      charge = "Breaking Signal" ;
+    }
+    else if (key=='B'){
+      penalty = "5000";
+      charge = "Hit and Run" ;
+    }
+    else if (key=='C'){
+      penalty = "5000";
+      charge = "Driving at wrong side" ;
+    }
+    }
+    else{
+      penalty="";
+      charge="";
   }
   return penalty, charge;
+}
+void show_charges(){
+  Serial.println();
+  Serial.println("Select Charge: ");
+  Serial.println("1: Not wearing Helmet      2: Lack of Documents            3: Rash Driving           A: Breaking Signal");
+  Serial.println("4: Not having Insurance    5: Overspeeding                 6: Drunk and Drive        B: Hit and Run");
+  Serial.println("7: Not wearing Seatbelt    8: Unauthorised Parking         9: Obstructing traffic    C: Wrong side driving");
 }
 // --------------------------------------------------------------------
 void array_to_string(byte array[], unsigned int len, char buffer[]) {
